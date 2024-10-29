@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tranquille/home.dart';
+import 'package:tranquille/music.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,9 +35,7 @@ class _TranquilleState extends State<Tranquille> {
 
   List<Widget> pages = [
     const Home(),
-    Container(
-      color: Colors.blue,
-    ), // Music()
+    const Music(),
     Container(
       color: Colors.orange,
     ),
