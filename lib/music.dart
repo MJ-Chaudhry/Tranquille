@@ -11,6 +11,9 @@ class Music extends StatefulWidget {
 class _MusicState extends State<Music> {
   List<Soundtrack> players = [
     Soundtrack("Piano", "assets/piano.wav"),
+    Soundtrack("Wind", "assets/wind.mp3"),
+    Soundtrack("Sea", "assets/sea.mp3"),
+    Soundtrack("Forest", "assets/forest.mp3"),
   ];
 
   Future<void> loadPlayers() async {
@@ -38,7 +41,10 @@ class _MusicState extends State<Music> {
         body: Padding(
           padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
           child: ListView.builder(
-            itemBuilder: (context, index) => PlayerContainer(players[index]),
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
+              child: PlayerContainer(players[index]),
+            ),
             itemCount: players.length,
           ),
         ));
@@ -76,7 +82,7 @@ class _PlayerContainerState extends State<PlayerContainer> {
                         ? Icons.pause_circle
                         : Icons.play_circle),
                   ),
-                  SizedBox(width: 24),
+                  const SizedBox(width: 24),
                   Text(widget.track.title),
                 ],
               ),
