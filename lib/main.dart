@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tranquille/home.dart';
 import 'package:tranquille/music.dart';
+import 'package:tranquille/notes.dart';
+import 'package:tranquille/resources.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,12 +38,8 @@ class _TranquilleState extends State<Tranquille> {
   List<Widget> pages = [
     const Home(),
     const Music(),
-    Container(
-      color: Colors.orange,
-    ),
-    Container(
-      color: Colors.grey,
-    ),
+    const Resources(),
+    const NotesPage(),
   ];
 
   @override
