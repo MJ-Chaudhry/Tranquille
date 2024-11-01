@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:tranquille/therapists.dart';
+
 class Resources extends StatefulWidget {
   const Resources({super.key});
 
@@ -13,7 +15,7 @@ class _ResourcesState extends State<Resources> {
 
   final List<Widget> _pages = [
     const ResourcePage(), // Books page
-    const TherapistsPage(), // Placeholder for therapists page
+    const TherapistListScreen(), // Placeholder for therapists page
   ];
 
   void _onNavigationRailTap(int index) {
@@ -118,17 +120,6 @@ class _ResourcePageState extends State<ResourcePage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class TherapistsPage extends StatelessWidget {
-  const TherapistsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Therapists Page', style: TextStyle(fontSize: 24)),
     );
   }
 }
