@@ -3,6 +3,7 @@ import 'package:tranquille/home.dart';
 import 'package:tranquille/music.dart';
 import 'package:tranquille/notes.dart';
 import 'package:tranquille/resources.dart';
+import 'package:tranquille/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,10 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: lightTheme,
+      themeMode: ThemeMode.light,
       home: const Tranquille(),
       debugShowCheckedModeBanner: false,
     );
@@ -46,21 +45,22 @@ class _TranquilleState extends State<Tranquille> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          fixedColor: Colors.amber,
-          unselectedItemColor: Colors.black,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.music_note), label: "Music"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.interests_outlined), label: "Resources"),
-            BottomNavigationBarItem(icon: Icon(Icons.note), label: "Notes"),
-          ],
-          currentIndex: pageIndex,
-          onTap: (value) => setState(() {
+        bottomNavigationBar: NavigationBar(
+          height: 64,
+          indicatorColor: Theme.of(context).colorScheme.secondary,
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          selectedIndex: pageIndex,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          onDestinationSelected: (value) => setState(() {
             pageIndex = value;
           }),
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+            NavigationDestination(icon: Icon(Icons.music_note), label: "Music"),
+            NavigationDestination(
+                icon: Icon(Icons.interests_outlined), label: "Resources"),
+            NavigationDestination(icon: Icon(Icons.note), label: "Notes"),
+          ],
         ),
         body: pages[pageIndex],
       ),

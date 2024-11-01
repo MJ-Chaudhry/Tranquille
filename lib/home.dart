@@ -60,21 +60,21 @@ class Home extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      print('Yaaaaayyyy!');
+                      print('Happy pressed');
                     },
                     child: const Text('Happy'),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
-                      print('Daaammmmnnn!');
+                      print('Sad pressed');
                     },
                     child: const Text('Sad'),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
-                      print('Oooooppps!');
+                      print('Anxious pressed');
                     },
                     child: const Text('Anxious'),
                   ),
