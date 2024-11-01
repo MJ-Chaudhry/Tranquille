@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-class Note extends ChangeNotifier {
-  String text = "";
-}
-
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
 
@@ -39,6 +35,14 @@ class _NotesPageState extends State<NotesPage> {
     });
   }
 
+  // int _selectedIndex = 0;
+
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,8 +71,7 @@ class _NotesPageState extends State<NotesPage> {
                 return GestureDetector(
                   onTap: () => _viewOrEditNote(index),
                   child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -91,11 +94,7 @@ class NoteDetailPage extends StatefulWidget {
   final int index;
   final Function(String, int) onSave;
 
-  const NoteDetailPage(
-      {super.key,
-      required this.note,
-      required this.index,
-      required this.onSave});
+  const NoteDetailPage({required this.note, required this.index, required this.onSave});
 
   @override
   State<NoteDetailPage> createState() => _NoteDetailPageState();
@@ -108,34 +107,36 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.note);
+
+    // Update note in real-time as text changes
+    _controller.addListener(() {
+      widget.onSave(_controller.text, widget.index);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Note'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: () {
-              widget.onSave(_controller.text, widget.index);
-              Navigator.pop(context);
-            },
-          ),
-        ],
+        title: Text('Edit Note'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: TextField(
           controller: _controller,
           maxLines: null,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'Enter note content...',
             border: OutlineInputBorder(),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
